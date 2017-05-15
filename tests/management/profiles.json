@@ -1,0 +1,43 @@
+{
+  "status": "success:ok",
+  "data": {
+    "PROFILES": [
+      {
+        "PROFILE": "aaacanode",
+        "LABEL": "AAA\/CA Server",
+        "PREFIX": "aaa",
+        "SUFFIX_ALLOWED": true,
+        "PRIMARY_ROLE": "INFRA",
+        "REQUIRES_PRIMARY_ROLE": true,
+        "POOL": null,
+        "REQUIRES_POOL": true,
+        "SECONDARY_ROLE": null,
+        "REQUIRES_SECONDARY_ROLE": false
+      },
+      {
+        "PROFILE": "adminwebnode",
+        "LABEL": "Admin Web Server",
+        "PREFIX": "adminweb",
+        "SUFFIX_ALLOWED": false,
+        "PRIMARY_ROLE": "TUMBLR_APP",
+        "REQUIRES_PRIMARY_ROLE": true,
+        "POOL": "ADMIN_POOL",
+        "REQUIRES_POOL": true,
+        "SECONDARY_ROLE": "ALL",
+        "REQUIRES_SECONDARY_ROLE": false
+      },
+      {
+        "PROFILE": "appcronnode",
+        "LABEL": "App Cron Server",
+        "PREFIX": "app-cron",
+        "SUFFIX_ALLOWED": false,
+        "PRIMARY_ROLE": "TUMBLR_APP",
+        "REQUIRES_PRIMARY_ROLE": true,
+        "POOL": "UTIL",
+        "REQUIRES_POOL": true,
+        "SECONDARY_ROLE": null,
+        "REQUIRES_SECONDARY_ROLE": false
+      }
+    ]
+  }
+}

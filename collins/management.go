@@ -22,6 +22,19 @@ type ProvisionOpts struct {
 	Contact string `url:"contact"`
 }
 
+type Profile struct {
+	Name                  string `json:"PROFILE"`
+	Label                 string `json:"LABEL"`
+	Prefix                string `json:"PREFIX"`
+	SuffixAllowed         bool   `json:"SUFFIX_ALLOWED"`
+	PrimaryRole           string `json:"PRIMARY_ROLE"`
+	RequiresPrimaryRole   bool   `json:"REQUIRES_PRIMARY_ROLE"`
+	SecondaryRole         string `json:"SECONDARY_ROLE"`
+	RequiresSecondaryRole bool   `json:"REQUIRES_SECONDARY_ROLE"`
+	Pool                  string `json:"POOL"`
+	RequiresPool          bool   `json:"REQUIRES_POOL"`
+}
+
 // powerActions is an internal function for performing various power actions via
 // collins.
 func (s ManagementService) powerAction(tag, action string) (*Response, error) {
@@ -139,4 +152,30 @@ func (s ManagementService) Provision(tag, profile, contact string, opts Provisio
 
 	resp, err := s.client.Do(req, nil)
 	return resp, err
+}
+
+// ManagementService.Profiles returns a list of available provisioning profiles.
+//
+// http://tumblr.github.io/collins/api.html#api-asset%20managment-provisioning-profiles
+func (s ManagementService) Profiles() ([]Profile, *Response, error) {
+	ustr, err := addOptions("api/provision/profiles", nil)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	req, err := s.client.NewRequest("GET", ustr)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	var c struct {
+		Profiles []Profile `json:"PROFILES"`
+	}
+
+	resp, err := s.client.Do(req, &c)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return c.Profiles, resp, err
 }
