@@ -61,7 +61,7 @@ func (a AssetService) Find(opts *AssetFindOpts) ([]Asset, *Response, error) {
 //
 // http://tumblr.github.io/collins/api.html#api-asset-asset-find-similar
 func (a AssetService) FindSimilar(tag string, opts *AssetFindOpts) ([]Asset, *Response, error) {
-	ustr, err := addOptions("api/asset/"+tag+"/similar", nil)
+	ustr, err := addOptions("api/asset/"+tag+"/similar", opts)
 	if err != nil {
 		return nil, nil, err
 	}
